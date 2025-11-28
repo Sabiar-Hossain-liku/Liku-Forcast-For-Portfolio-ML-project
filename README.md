@@ -1,6 +1,120 @@
-📈 Stock Forecast MLOps PlatformProject OverviewThis project is a comprehensive Machine Learning Operations (MLOps) platform for time series forecasting of stock prices. It leverages a modern, serverless stack to automate data ingestion, model training, persistence, and web deployment.The application is built using Python for the forecasting core, Streamlit for an interactive user interface, Supabase for data and state persistence, and a GitHub Actions pipeline for automated Continuous Integration/Continuous Deployment (CI/CD) to Vercel.🌟 FeaturesReal-time Data Fetching: Fetches historical and up-to-date stock price data (e.g., via yfinance).Time Series Forecasting: Uses advanced Python libraries (e.g., Prophet, ARIMA, or LSTM) to predict future stock prices.Interactive Visualization: Displays historical data, forecast predictions, and confidence intervals using interactive charts (Plotly).Persistent Predictions: Saves predictions and model metadata to a dedicated Supabase PostgreSQL database.Automated Retraining: Uses a scheduled GitHub Action to periodically update and save the trained model/predictions, ensuring the application always provides fresh insights.Responsive Web App: Deployed via Streamlit on Vercel for fast, accessible, and responsive user access.🛠️ Technology StackComponentTechnologyRoleMachine LearningPython, Pandas, NumPyData preprocessing and core logic.Forecasting ModelProphet / Scikit-learn / TensorFlowTime Series prediction model implementation.Frontend/AppStreamlit, PlotlyInteractive web interface and data visualization.Database/BackendSupabase (PostgreSQL, Storage)Persistent data storage, prediction logging, and model artifact storage.CI/CDGitHub ActionsAutomated training schedule (MLOps) and deployment trigger.DeploymentVercelHosting the Streamlit Python application.📐 Architecture and MLOps PipelineThe project follows a decoupled, automated architecture:Source Control: All code lives in this GitHub Repository.Data Persistence: Supabase acts as the centralized data store for historical data, pre-trained model metadata, and user-generated predictions.Model Training (MLOps): A scheduled GitHub Action runs a separate training script (train.py) on a cadence (e.g., daily). This script fetches data, trains the model, and pushes the results/metadata to Supabase.Web App: The Streamlit app (app.py) is hosted on Vercel. It uses the Supabase connection to retrieve the latest predictions and data, ensuring the web app is always displaying up-to-date information without needing to run the ML training inside the web request.Deployment (CD): Any push to the main branch automatically triggers a deployment update on Vercel via the GitHub integration.🚀 Local Setup and RunTo run the Streamlit application locally, follow these steps.PrerequisitesPython 3.8+A Supabase Project (required for API keys)1. Clone the repositorygit clone <repository_url>
+# 📈 Stock Forecast MLOps Platform
+
+## Project Overview
+
+This project is a comprehensive **Machine Learning Operations (MLOps)
+platform** for **time series forecasting of stock prices**.\
+It uses a modern, serverless architecture to automate data ingestion,
+model training, persistence, and web deployment.
+
+The application is built using:
+
+-   **Python** → forecasting core\
+-   **Streamlit** → interactive UI\
+-   **Supabase** → database + model/prediction storage\
+-   **GitHub Actions** → automated CI/CD pipeline\
+-   **Vercel** → deployment host
+
+## 🌟 Features
+
+### Real-time Data Fetching
+
+Fetches historical and live stock price data (e.g., via **yfinance**).
+
+### Time Series Forecasting
+
+Models: - Prophet - ARIMA - LSTM
+
+### Interactive Visualization
+
+Uses **Plotly** for charts: - Historical data\
+- Forecast curve\
+- Confidence intervals
+
+### Persistent Predictions
+
+Stores predictions, model metadata, and logs in **Supabase PostgreSQL**.
+
+### Automated Retraining
+
+A scheduled **GitHub Action** periodically retrains the model and
+updates predictions.
+
+### Responsive Web App
+
+Streamlit app deployed on **Vercel**.
+
+## 🛠️ Technology Stack
+
+  ---------------------------------------------------------------------------------
+  Component            Technology                                   Role
+  -------------------- -------------------------------------------- ---------------
+  Machine Learning     Python, Pandas, NumPy                        Data
+                                                                    preprocessing &
+                                                                    core logic
+
+  Forecasting Model    Prophet / Scikit-learn / TensorFlow          Time series
+                                                                    prediction
+                                                                    models
+
+  Frontend/App         Streamlit, Plotly                            UI +
+                                                                    visualization
+
+  Database/Backend     Supabase (PostgreSQL, Storage)               Storage for
+                                                                    predictions &
+                                                                    models
+
+  CI/CD                GitHub Actions                               Automated
+                                                                    training and
+                                                                    deployment
+
+  Deployment           Vercel                                       Hosting the
+                                                                    Streamlit app
+  ---------------------------------------------------------------------------------
+
+## 📐 Architecture and MLOps Pipeline
+
+1.  **Source Control** --- Code in GitHub.
+2.  **Data Persistence** --- Supabase stores historical data and model
+    artifacts.
+3.  **Model Training** --- GitHub Action runs `train.py` on a schedule.
+4.  **Web App** --- Streamlit app fetches latest predictions from
+    Supabase.
+5.  **Continuous Deployment** --- Push to `main` triggers Vercel
+    deployment.
+
+## 🚀 Local Setup & Run
+
+### Prerequisites
+
+-   Python 3.8+
+-   A Supabase project
+
+### 1. Clone repository
+
+``` bash
+git clone <repository_url>
 cd stock-forecast-platform
-2. Create and Activate Virtual Environmentpython -m venv venv
-source venv/bin/activate  # On Linux/macOS
-.\venv\Scripts\activate   # On Windows
-3. Install DependenciesThe required packages (streamlit, pandas, plotly, supabase, etc.) are listed in requirements.txt.pip install -r requirements.txt
+```
+
+### 2. Create virtual environment
+
+**Linux/macOS:**
+
+``` bash
+python -m venv venv
+source venv/bin/activate
+```
+
+**Windows:**
+
+``` bash
+python -m venv venv
+.env\Scriptsctivate
+```
+
+### 3. Install dependencies
+
+``` bash
+pip install -r requirements.txt
+```
